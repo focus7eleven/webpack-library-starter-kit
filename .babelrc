@@ -1,6 +1,18 @@
 {
-  "presets": ["@babel/env"],
+  "presets": [
+    ["@babel/env"],
+    "@babel/preset-react",
+    ["@babel/preset-typescript", { "allExtensions": true, "isTSX": true }]
+  ],
   "plugins": [
-    "@babel/plugin-proposal-object-rest-spread"
+    "@babel/plugin-proposal-object-rest-spread",
+    [
+      "import",
+      {
+        "libraryName": "antd",
+        "libraryDirectory": "es",
+        "style": true
+      }
+    ]
   ]
 }
