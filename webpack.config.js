@@ -27,6 +27,22 @@ module.exports = {
     globalObject: "(typeof self !== 'undefined' ? self : this)", // TODO Hack (for Webpack 4+) to enable create UMD build which can be required by Node without throwing error for window being undefined (https://github.com/webpack/webpack/issues/6522)
     umdNamedDefine: true,
   },
+  externals: {
+    react: {
+      root: 'React',
+      commonjs2: 'react',
+      commonjs: 'react',
+      amd: 'react',
+      umd: 'react',
+    },
+    'react-dom': {
+      root: 'ReactDOM',
+      commonjs2: 'react-dom',
+      commonjs: 'react-dom',
+      amd: 'react-dom',
+      umd: 'react-dom',
+    },
+  },
   resolve: {
     extensions: ['.ts', '.tsx', '.js', '.less'],
   },
@@ -36,6 +52,11 @@ module.exports = {
         test: /(\.tsx|\.ts|\.jsx|\.js)$/,
         loader: 'babel-loader',
         exclude: /node_modules/,
+        // include: [
+        //   path.resolve(__dirname, 'src'),
+        //   path.resolve(__dirname, 'node_modules/antd'),
+        //   path.resolve(__dirname, 'node_modules/@ant-design/icons'),
+        // ],
       },
       {
         test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
