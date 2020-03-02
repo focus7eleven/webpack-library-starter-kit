@@ -9,6 +9,9 @@
     "lib/"
   ],
   "scripts": {
+    "init": "rm -rf node_modules && tnpm install && cd example && rm -rf node_modules && tnpm install",
+    "dev": "webpack --progress --colors --watch --mode=development --output-library-target=umd",
+    "demo": "cd example && umi dev",
     "lint": "eslint 'src/**/*.{ts,tsx,js}' --fix",
     "build:umdmin": "webpack --mode=production --optimize-minimize --output-library-target=umd",
     "build:umd": "webpack --mode=development --optimize-minimize --output-library-target=umd",
@@ -16,7 +19,6 @@
     "build": "npm-run-all build:*",
     "dev:umd": "webpack --progress --colors --watch --mode=development --output-library-target=umd",
     "dev:commonjs": "webpack --progress --colors --watch --mode=development --output-library-target=commonjs2",
-    "dev": "npm-run-all --parallel dev:*",
     "clean": "rimraf dist lib coverage"
   },
   "repository": {

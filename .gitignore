@@ -10,3 +10,5 @@
 /coverage
 .doc
 .DS_Store
+/example/.umi
+/example/node_modules

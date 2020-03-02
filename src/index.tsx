@@ -15,7 +15,7 @@ const ApiDocument: React.FC<ApiDocumentProps> = props => {
       <div className={styles.container}>
         <Button onClick={() => setState(prev => prev + 1)}>
           <DownCircleFilled />
-          Normal Button Right Here: {props.test}, {state}
+          12 Normal Button Right Here: {props.test}, {state}
         </Button>
       </div>
     </ConfigProvider>
