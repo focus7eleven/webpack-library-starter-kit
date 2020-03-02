@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-// import { Button, Select } from 'antd';
-// import 'antd/lib/style/index';
-// import { DownCircleFilled } from '@ant-design/icons';
+import { ConfigProvider, Button } from 'antd';
+import { DownCircleFilled } from '@ant-design/icons';
 import styles from './index.less';
 
 interface ApiDocumentProps {
@@ -11,34 +10,16 @@ interface ApiDocumentProps {
 const ApiDocument: React.FC<ApiDocumentProps> = props => {
   const [state, setState] = useState(0);
 
-  // const Test = demo()
-
   return (
-    <div className={styles.container}>
-      {/* <Button>
-        Normal Button Right Here: {props.test}, {state}
-      </Button>
-      <Select>
-        <Select.Option key="1" value={1}>
-          1
-        </Select.Option>
-      </Select> */}
-      <span onClick={() => setState(1)}>
-        document component, {props.test}, {state}
-      </span>
-      {/* <Test /> */}
-    </div>
+    <ConfigProvider prefixCls="oneapi-ant">
+      <div className={styles.container}>
+        <Button onClick={() => setState(prev => prev + 1)}>
+          <DownCircleFilled />
+          Normal Button Right Here: {props.test}, {state}
+        </Button>
+      </div>
+    </ConfigProvider>
   );
 };
-
-// export const demo = () => {
-//   const children = () => {
-//     const [state, setState] = useState('123');
-
-//     return <div>{state}</div>;
-//   };
-
-//   return children
-// };
 
 export default ApiDocument;

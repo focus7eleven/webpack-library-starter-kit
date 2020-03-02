@@ -16,6 +16,13 @@ ${pkg.description}\n
 
 const plugins = [new webpack.BannerPlugin(banner), new BundleAnalyzerPlugin()];
 
+const findPath = moduleName => {
+  const pathArr = require.resolve(moduleName).split('/');
+  const pathIndex = pathArr.findIndex(path => path === 'node_modules');
+  const path = `${pathArr.slice(pathIndex, pathIndex + 2).join('/')}`;
+  return path;
+};
+
 module.exports = {
   entry: `${__dirname}/index.js`,
   devtool: 'source-map',
@@ -52,11 +59,6 @@ module.exports = {
         test: /(\.tsx|\.ts|\.jsx|\.js)$/,
         loader: 'babel-loader',
         exclude: /node_modules/,
-        // include: [
-        //   path.resolve(__dirname, 'src'),
-        //   path.resolve(__dirname, 'node_modules/antd'),
-        //   path.resolve(__dirname, 'node_modules/@ant-design/icons'),
-        // ],
       },
       {
         test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
@@ -74,8 +76,8 @@ module.exports = {
         ],
       },
       {
-        test: /\.less$/,
-        include: [path.resolve(__dirname, 'src'), path.resolve(__dirname, 'node_modules/antd')],
+        test: /\.less|\.css$/,
+        include: [path.resolve(__dirname, 'src')],
         use: [
           {
             loader: 'style-loader',
@@ -97,7 +99,31 @@ module.exports = {
           },
         ],
       },
+      {
+        test: /\.less|\.css$/,
+        include: [path.resolve(__dirname, findPath('antd'))],
+        use: [
+          {
+            loader: 'style-loader',
+          },
+          {
+            loader: 'css-loader',
+            options: {
+              modules: {
+                mode: 'local',
+                localIdentName: 'oneapi-[local]',
+              },
+            },
+          },
+          {
+            loader: 'less-loader',
+            options: {
+              javascriptEnabled: true,
+            },
+          },
+        ],
+      },
     ],
   },
-  plugins: plugins,
+  // plugins: plugins,
 };
